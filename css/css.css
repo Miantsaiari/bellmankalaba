@@ -1,0 +1,65 @@
+@charset "utf-8";
+/* CSS Document */
+.fonty{
+	font-family:alex-brush;	
+}
+#mySidenav a {
+	position: absolute;
+	left: -120px;
+	transition: 0.3s;
+	padding: 15px;
+	width: 150px;
+	height: 30px;
+	text-decoration: none;
+	font-size: 15px;
+	color: white;
+	border-radius: 0 5px 5px 0;
+}
+
+#mySidenav i{
+	position: absolute;
+	right: 15px;
+} 
+#mySidenav a:hover{
+	left: 0;
+}
+#drag{
+	top: 20px;
+  	background-color: #4CAF50;
+}
+#item{
+	top: 90px;
+  	background-color: #2196F3;
+}
+#delete{
+	top: 160px;
+  	background-color: #f44336;
+}
+#update{
+	top: 230px;
+  	background-color: #555
+}
+#debut{
+	top: 300px;
+  	background-color: #9bb913
+}
+#fin{
+	top: 370px;
+  	background-color: #cdc2df
+}
+#rafraichir{
+	top: 440px;
+  	background-color: #9713a3
+}
+#chercher{
+	top: 510px;
+  	background-color: #e1f014
+}
+#chercherMin{
+	top: 580px;
+  	background-color: #060808
+}
+#nommer{
+	top: 650px;
+  	background-color: #060808
+}

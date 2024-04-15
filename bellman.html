@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
+<link href="css/css.css" rel="stylesheet" type="text/css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body style="background-color: aqua;">
+		<div class="container-fluid" id="mySidenav">
+			<a id="drag" >Positionner un sommet <i class="fas fa-hand-pointer"></i></a>
+		<a id="item" >Ajouter<br/> un sommet <i class="fas fa-plus"></i></a>
+		<a id="delete" >Supprimer<br/> un sommet <i class="fas fa-trash-alt"></i></a>
+		<a id="update" >Mettre à jour <i class="fas fa-sync-alt"></i></a>
+		<a id="debut" >Définir un début <i class="fas fa-flag-checkered"></i></a>
+		<a id="fin" style="color: black;">Définir une fin <i class="fas fa-flag"></i></a>
+		<a href="javascript: location.reload();" id="rafraichir" >Rafraîchir <i class="fas fa-sync"></i></a>
+		<a id="chercher" style="color: black;">Chercher max <i class="fas fa-search-plus"></i></a>
+		<a id="chercherMin" >Chercher Min <i class="fas fa-search-minus"></i></a>
+		</div>
+
+	<canvas id="canvas" width="1280px" height="630px" style="background: white; margin-top: 1%;" ></canvas>
+
+	
+
+	
+	<script>
+	window.onload = function() {
+		var liens = new ConteneurLiens();
+
+		var canvas = document.getElementById("canvas");
+
+		var dragButton = document.getElementById("drag");
+		var itemButton = document.getElementById("item");
+		var updateButton = document.getElementById("update");
+		var nommerButton = document.getElementById("nommer");
+		var deleteButton = document.getElementById("delete");
+		var debutButton = document.getElementById("debut");
+		var finButton = document.getElementById("fin");
+
+		var chercherBouton = document.getElementById("chercher");
+		var chercherBoutonMin = document.getElementById("chercherMin");
+		var gs = new Scene(canvas);
+                
+                /*var timer = new Timer({
+                    onTimeout : function() {
+                        dragButton.style.left = parseInt(dragButton.style.left) + 1 + "px";
+                    }
+                });
+                timer.start();
+                timer.play(false);*/
+
+		gs.paint();
+
+		var viewManager = new ViewManager(gs, liens);
+
+		function getMousePosition(element, event) {
+			return {
+				x : event.clientX - element.offsetLeft,
+				y : event.clientY - element.offsetTop
+			};
+		}
+
+		canvas.addEventListener('mousedown', function(event) {
+			viewManager.onMouseDown(getMousePosition(canvas, event));
+		});
+
+		canvas.addEventListener('mousemove', function(event) {
+			viewManager.onMouseMove(getMousePosition(canvas, event));
+		});
+
+		canvas.addEventListener('mouseup', function(event) {
+			viewManager.onMouseUp(getMousePosition(canvas, event));
+		});
+
+		canvas.addEventListener('click', function(event) {
+			viewManager.onClick(getMousePosition(canvas, event));
+		});
+
+		canvas.addEventListener('dblclick', function(event) {
+			viewManager.onDblClick(getMousePosition(canvas, event));
+		});
+
+		chercherBouton.addEventListener('click', function(event) {
+                    liens.setIsMin(false);
+                    liens.setView(viewManager);
+                    liens.main();
+		});
+		chercherBoutonMin.addEventListener('click', function(event) {
+                    liens.setIsMin(true);
+                    liens.setView(viewManager);
+                    liens.main();
+		});
+
+		dragButton.addEventListener('click', function(event) {
+			viewManager.mode = "drag";
+		});
+
+		itemButton.addEventListener('click', function(event) {
+			viewManager.mode = "item";
+		});
+
+		updateButton.addEventListener('click', function(event) {
+			viewManager.mode = "update";
+		});
+
+		deleteButton.addEventListener('click', function(event) {
+			viewManager.mode = "delete";
+		});
+
+                debutButton.addEventListener('click', function(event) {
+                    viewManager.mode = "debut";
+                    
+                });
+                
+                finButton.addEventListener('click', function(event) {
+                    viewManager.mode = "fin";
+                });
+	}
+	</script>
+  </body>
+  <script type="text/javascript" src="js/link2.js"></script>
+    <script type="text/javascript" src="js/llp.js"></script>
+	<script type="text/javascript" src="js/link1.js"></script>
+	<script type="text/javascript" src="js/teth.js"></script>
+	<script type="text/javascript" src="js/ora.js"></script>
+	<script type="text/javascript" src="js/pointSomm.js"></script>
+	<script type="text/javascript" src="js/managerLink.js"></script>
+    <script type="text/javascript" src="js/link.js"></script>
+</html>
